@@ -1,0 +1,9 @@
+[requires]
+boost/1.79.0
+gtest/1.11.0
+spdlog/1.10.0
+fmt/8.1.1
+
+[generators]
+cmake
+cmake_find_package
