@@ -21,6 +21,9 @@ bin/mkt_conn_unit_tests
 ```
 
 ## Tests
+There are unit tests for `JsonIncrementalMessageConverter` and `ConsumerManager` classes.
+Infrastructure code is expected to be tested by integration tests.  
+
 Besides unit tests, there is also some sort of integration test in `integration_tests` directory.
 It is basically a simple bash script, which runs server and a number of clients. After that it `cat`s 
 servers stats file.
@@ -28,3 +31,14 @@ It can be run from `integration_tests` dir with
 ```
 ./test.sh ../build/bin/mkt_conn_server ../build/bin/mkt_conn_client
 ```
+
+## Protocol
+Protocol is based on a simple json. `JsonIncrementalMessageConverter` is responsible for creating/parsing it.
+
+
+## Design note
+`JsonIncrementalMessageConverter`, `ConsumerManager` and `MultiQueueProcessor` could be passed to 
+`TcpServer` either by interface pointer or by template. Since this is a sort of test task, I'm not 
+aware of load profile and not sure which way is better. 
+For simplicity, I just didn't do any of that at this point, but kept it low-coupled, 
+and any of these approaches can be implemented easily. 
